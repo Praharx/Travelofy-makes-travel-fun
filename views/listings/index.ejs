@@ -1,0 +1,181 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+
+<style>
+  ::-webkit-scrollbar {
+        display: none;
+    }
+
+  .filters{
+    width: 70%;
+   
+    margin-top: 0.5rem;
+    display: flex;
+    overflow-x: auto; /* Horizontal scroll */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    white-space: nowrap; /* Prevent icons from wrapping */
+  }
+
+  .filter{
+    display: inline-block;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-right: 0.25rem;
+    opacity: 0.7;
+  }
+
+  .filter p{
+    
+    font-size: small;
+  }
+
+  .filter:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+  .toggle-input:checked + .toggle-label .toggle-inner {
+            transform: translateX(100%);
+  }
+
+  .tax-info{
+    display: none;
+  }
+
+  
+
+  
+
+</style>
+     
+
+<div class="contain flex flex-wrap gap-3 ">
+  <div class="filters flex  justify-center items-center gap-6 ">
+      
+      
+    <div class="filter">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-gopuram"></i></div>
+      <p>Iconic Cities</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain-sun"></i></div>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-water-ladder"></i></div>
+      <p>Amazing Pools</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-tents"></i></div>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-cow"></i></div>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-snowflake"></i></div>
+      <p>Artic</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-brands fa-fly"></i></div>
+      <p>Sky Rides</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-hippo"></i></div>
+      <p>Safari</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-person-skiing"></i></div>
+      <p>Skiing</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-ship"></i></div>
+      <p>Cruises</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-brands fa-pagelines"></i></div>
+      <p>Tropical</p>
+    </div>
+    
+    <div class="filter">
+      <div><i class="fa-solid fa-umbrella-beach"></i></div>
+      <p>Beaches</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-meteor"></i></div>
+      <p>Star-gazing</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-bullseye"></i></div>
+      <p>Archery</p>
+    </div>
+
+    
+  </div>
+  
+  <div class="tax-switch mt-2 p-2 border border-grey-300 rounded-lg inline-flex justify-center items-center right-0 ">
+    <span class="p-1">Display Total After Taxes</span>
+    <input type="checkbox" role="switch" id="toggle" class="toggle-input hidden">
+    <label for="toggle" class="toggle-label block w-12 h-6 bg-gray-400 rounded-full cursor-pointer">
+        <span class="toggle-inner block h-full w-6 bg-neutral-300 rounded-full shadow-md transform transition-transform duration-300 ease-in-out"></span>
+    </label>
+  </div>
+  <div class="tax-switch mt-2 p-2 border border-grey-300 rounded-lg inline-flex justify-center items-center right-0 ">
+    <span class="p-1">Nature-Friendly</span>
+    <i class="fa-solid fa-feather-pointed"></i>
+
+    
+  </div>
+</div>
+
+
+
+
+  
+    <div class="flex justify-center items-center flex-wrap gap-6">
+      
+      <%for(let list of allListings){ %>
+        <div class="flex flex-col items-center justify-center w-full max-w-sm p-2 card">
+          <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md" style="background-image: url(<%=list.image.url%>)"></div>
+      
+          <div class="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-lime-800">
+              <h3 class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white"><i><%=list.title%></i></h3>
+      
+              <div class="flex items-center justify-between px-3 py-2 bg-white">
+                  <span class="font-bold text-black ">&#8377;<%=list.price.toLocaleString("en-IN")%>/night
+                  <i class="tax-info"> *+18% GST</i></span>
+                  
+                  <a href="listings/<%=list.id%>"><button class="px-2 py-1 text-xs font-semibold text-white bg-lime-800 rounded hover:bg-white hover:text-lime-800">Explore&rightarrow;</button></a>
+              </div>
+          </div>
+      </div>
+      <%}%>
+    </div>
+
+
+<script>
+    let priceToggle = document.getElementById('toggle');
+    priceToggle.addEventListener("click",()=>{
+      let taxInfo = document.getElementsByClassName("tax-info");
+      for( info of taxInfo){
+        if(info.style.display !== "block"){
+          info.style.display = "block";
+        }else{
+          info.style.display = "none";
+        }
+      }
+    })
+</script>
+
+    

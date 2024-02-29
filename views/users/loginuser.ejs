@@ -1,0 +1,40 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+
+<body>
+    
+    <div class="max-w-md mx-auto my-10 bg-white p-5 rounded-md shadow-md w-100">
+      <h2 class="text-2xl text-green-900 font-semibold mb-8 text-center ">Log-in</h2>
+
+      <form action="/login" method="POST"  data-te-validation-init data-te-active-validation="true"
+        autocomplete="off" novalidate>
+
+        <div class="relative mb-3" data-te-input-wrapper-init data-te-validate="input"
+          data-te-validation-ruleset="isRequired"
+          data-te-invalid-feedback="Username is required">
+          <input type="text"
+            class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-success-900 dark:placeholder:text-sucess-900 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+            placeholder="username" name="username" />
+          <label for="username"
+            class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-success-900 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-success-200 dark:peer-focus:text-success">USERNAME
+          </label>
+        </div>
+
+        <div class="relative mb-3" data-te-input-wrapper-init data-te-validate="input"
+          data-te-validation-ruleset="isRequired"
+          data-te-invalid-feedback="Password is required">
+          <input type="password"
+            class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-success-900 dark:placeholder:text-sucess-900 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+            placeholder="password" name="password" />
+          <label for="password"
+            class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-success-900 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-success-200 dark:peer-focus:text-success">PASSWORD
+          </label>
+        </div>
+
+        
+        <button type="submit" class="bg-green-900 text-white p-2 rounded-md  hover:bg-white hover:border border-green-400 hover:text-green-900"
+          data-te-submit-btn-ref>LOGIN
+        </button>
+      </form>
+    </div>
+
+</body>

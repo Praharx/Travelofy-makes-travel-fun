@@ -1,0 +1,126 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+<script>
+    const mapToken = "<%= process.env.MAP_TOKEN %>";
+    const listing = <%- JSON.stringify(foundList) %> ;
+</script>
+
+    <body class="flex justify-center">
+        <div class="mx-auto text-center">
+            <h2 class="text-2xl text-green-900 font-semibold mb-4">
+                <%= foundList.title %>
+            </h2>
+            <div class="image w-1/2 h-60 bg-cover rounded-lg" style="background-image: url(<%=foundList.image.url%>)">
+            </div>
+            <div class="text-left px-80">
+                <p class="text-gray-700 ">
+                   Owned By: <i>@<%= foundList.owner.username %></i>
+                </p>
+
+                <p class="text-gray-700 ">
+                    <%= foundList.description %>
+                </p>
+                <p class="text-gray-700 ">Price: &#8377;<%=foundList.price.toLocaleString("en-IN")%></p>
+                <p class="text-gray-700 ">Location:<%= foundList.location %>
+                </p>
+                <p class="text-gray-700 mb-2">Country: <%= foundList.country%>
+                </p>
+            </div>
+
+            <!-- Edit and Delete Buttons -->
+            <% if(currUser && currUser._id.equals(foundList.owner._id)){ %>
+            <div class="flex justify-center">
+                <form class="bg-green-900 text-white p-2 rounded-md mr-2 hover:bg-blue-600"
+                    action="/listings/<%= foundList._id%>/edit" method="get">
+                    <button>Edit</button>
+                </form>
+                <form action="/listings/<%= foundList._id%>?_method=DELETE" method="post">
+                    <button class="bg-green-900 text-white p-2 rounded-md hover:bg-red-600">Delete </button>
+                </form>
+            </div>
+            <%  } %>
+            
+            </br>
+            <hr class="w-3/4 mx-auto border-gray-300"></hr>
+            <% if (foundList.reviews.length){%>
+            <div class="mx-auto bg-white p-5 w-100 flex justify-center">
+                <h4 class="text-2xl text-green-900 font-semibold mb-8 text-center ">All Reviews</h4>
+                <section class="px-4">
+                    <div class="grid gap-10 text-center md:grid-cols-2">
+                        <% for(review of foundList.reviews){%>
+                        <div class="mb-6 md:mb-0 border border-gray-300 w-100 rounded-lg">
+                            <p class="my-1 text-xl p-1 text-center text-black-500"><b>@<%= review.author.username %></b></p>
+                            <p class="starability-result mx-auto my-1" data-rating="<%= review.rating %>"></p>
+                            <p class="my-2 text-xl p-1 text-black-500">
+                                "<%= review.comment %>"
+                                </p>
+                            
+                            <form action="/listings/<%= foundList._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                                <button class="border border-gray-500 text-gray-500 rounded-md px-4 py-2 my-1 mx-1 flex hover:bg-red-700 hover:text-white hover:border-gray-900 transition duration-300 ease-in-out "><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                        </div>
+                        <% } %>
+                    </div>
+                </section>
+            </div>
+            <hr class="w-3/4 mx-auto border-gray-300"></hr>
+            <% } %>
+            <% if(currUser){ %>
+            <div class="max-w-md mx-auto my-5 bg-white p-5 rounded-md shadow-md w-100 ">
+                    <h4 class="text-xl text-green-900 font-semibold mb-4 text-center ">Leave A Review</h4>
+                    <form action="/listings/<%= foundList._id %>/reviews" method="POST" data-te-validation-init
+                        data-te-active-validation="true" autocomplete="off" novalidate>
+                        <div class="mb-1 form-control">
+                            <label for="rating">Rating</label>
+
+                                <fieldset class="starability-slot mx-auto my-1">
+                                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                    <label for="first-rate1" title="Terrible">1 star</label>
+                                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                    <label for="first-rate2" title="Not good">2 stars</label>
+                                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                    <label for="first-rate3" title="Average">3 stars</label>
+                                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                    <label for="first-rate4" title="Very good">4 stars</label>
+                                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                    <label for="first-rate5" title="Amazing">5 stars</label>
+                                </fieldset>
+                        </div>
+                        
+                          
+
+
+                        <div class="relative mb-5 flex items-stretch" data-te-input-wrapper-init
+                            data-te-validate="input" data-te-validation-ruleset="isRequired"
+                            data-te-invalid-feedback="Comment is required">
+                            <textarea
+                                class="peer block min-h-[auto] w-full rounded border-0  px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-success-900 dark:placeholder:text-success-900 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                                name="review[comment]" rows="3" placeholder="comments">
+                              </textarea>
+                            <label for="comment"
+                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-success-900 dark:peer-focus:text-">
+                                Comments
+                            </label>
+                        </div>
+                        <button
+                            class="border border-gray-500 text-gray-500 rounded-md px-4 py-2 hover:bg-gray-700 hover:text-white hover:border-gray-900 transition duration-300 ease-in-out"
+                            data-te-submit-btn-ref>Submit
+                        </button>
+
+                    </form>
+                    
+            </div>
+            <hr class="w-3/4 mx-auto border-gray-300"></hr>
+            <% } %>
+        </div> 
+        <div class="mx-auto bg-white p-2 w-100 flex flex-col justify-center items-center">
+            <h4 class="text-2xl text-green-900 font-semibold mb-4">Where you'll be</h4>
+            <div id="map" class="rounded-lg"></div>
+
+
+
+        </div>
+        
+
+    </body>
+<script src="/js/map.js"></script>

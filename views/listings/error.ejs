@@ -1,0 +1,24 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+
+
+
+<!-- component -->
+<body class="bg-emerald-100">
+    <section class="grid place-items-center bg-emerald-100 p-16 w-100">
+        <div class="flex gap-4">
+          <!-- Alert Red Card {min-h-[1.75rem]} -->
+          <div class="flex min-h-[9rem] w-58 flex-col rounded-md bg-rose-500 px-4 py-6 text-rose-50">
+            <span class="mb-4 grid h-7 max-h-[1.75rem] min-h-[1.75rem] w-7 min-w-[1.75rem] max-w-[1.75rem] place-items-center rounded-full bg-rose-600/90">
+              <!-- SVG: X -->
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+              </svg>
+              <!-- SVG: X -->
+            </span>
+            <p><%= message%></p>
+          </div>
+      
+          
+        </div>
+      </section>
+</body>

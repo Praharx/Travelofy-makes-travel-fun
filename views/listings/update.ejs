@@ -1,0 +1,65 @@
+<% layout('/layouts/boilerplate.ejs') -%>
+<body>
+     <div class=" mx-auto my-5 bg-white p-5 rounded-md shadow-md w-1/2">
+        <h2 class="text-2xl text-green-900 font-semibold mb-8 text-center ">Update this Listing</h2>
+    
+        <form action="/listings/<%=listing._id%>?_method=PUT" method="POST" class="form" id="form" enctype="multipart/form-data">
+          <div class="mb-4 form-control w-full">
+            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title</label>
+            <input type="text" id="title" value=<%=listing.title%> name="listing[title]" class="w-full p-2 border border-gray-300 rounded-md" required>
+              <i class="fas fa-check-circle"></i>
+              <i class="fas fa-exclamation-circle"></i>
+              <small>Error Message</small>
+          </div>
+    
+          <div class="form-control">
+            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
+            <textarea  name="listing[description]" rows="4" class="w-full p-2 border border-gray-300 rounded-md" required><%=listing.description%></textarea>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error Message</small>
+          </div>
+
+          <div class="mb-4" form-control>
+            <div class="block text-gray-700 text-sm font-bold mb-2">Original Listing Image Preview</div> 
+            <img src="<%= originalImageUrl  %>" class="rounded-lg" alt="Your original Listing Image">
+          </div>
+
+          <div class="mb-4 form-control">
+            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Upload new Image</label>
+            <input type="file" id="image"  name="listing[image]" class="w-full p-2 border border-gray-300 rounded-md">
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error Message</small>
+          </div>
+          
+
+          <div class="mb-4 form-control">
+            <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price</label>
+            <input type="number" id="price" value="<%=listing.price%>" name="listing[price]" class="w-full p-2 border border-gray-300 rounded-md" required>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error Message</small>
+          </div>
+
+          <div class="mb-4 form-control">
+            <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Location</label>
+            <input type="text" id="location" value=<%=listing.location%> name="listing[location]" class="w-full p-2 border border-gray-300 rounded-md" required>
+            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-exclamation-circle"></i>
+            <small>Error Message</small>
+          </div>
+
+          <div class="mb-4 form-control">
+            <label for="country" class="block text-gray-700 text-sm font-bold mb-2">Country</label>
+            <input type="text" id="country" value=<%=listing.country%> name="listing[country]" class="success w-full p-2 border border-gray-300 hover:border-green-900 focus:border-green-500 rounded-md" required>
+             <i class="fas fa-check-circle"></i>
+              <i class="fas fa-exclamation-circle"></i>
+              <small>Error Message</small>
+          </div>
+    
+          <button type="submit"  class="bg-green-900 text-white p-2 rounded-md  hover:bg-green-200">Update Listing</button>
+        </form>
+      </div>
+    
+</body>
